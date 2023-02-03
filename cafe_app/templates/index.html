@@ -5,5 +5,22 @@
 {% block title %}トップページ{% endblock title %}
 
 {% block contents %}
-<h1>welcome to django app.</h1>
+<div class="topPage">
+    <img class="topMainImg" src="{% static 'assets/img/first-view.jpg' %}" alt="first-view">
+    <div class="wrapperNav">
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">MENU</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<section class="welcome">
+    <div>
+        <h2>ようこそ、hoge cafeへ</h2>
+        <p>こちらはhoge cafeの公式サイトです。</p>
+    </div>
+</section>
 {% endblock contents %}
