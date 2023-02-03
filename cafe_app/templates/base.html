@@ -1,0 +1,25 @@
+{% load static %}
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock title %}</title>
+
+        {% block head %}{% endblock head %}
+        
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+    </head>
+    <body>
+        {% block contents %}{% endblock contents %}
+
+        <!-- フッター -->
+
+        <footer>
+            <div>
+                <p>Copyright © 2023 hoge All rights Reserved.</p>
+                <p>Powered by piyo</p>
+            </div>
+        </footer>
+    </body>
+</html>
