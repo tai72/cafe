@@ -11,33 +11,16 @@
     </div>
     <div class="wrapperMenu">
         <ul class="ulMenu">
-            <li class="menuContent">
-                <img src="{% static 'assets/img/brend-coffee.jpg' %}" alt="brend-coffee">
-                <h3>ブレンドコーヒー</h3>
-                <p class="price">420円</p>
-                <p class="description">
-                    当店おすすめの一杯です。<br>
-                    迷った場合はぜひこちらをご堪能ください。
-                </p>
-            </li>
-            <li class="menuContent">
-                <img src="{% static 'assets/img/cafe-au-lait.jpg' %}" alt="cafe-au-lait">
-                <h3>カフェオレ</h3>
-                <p class="price">500円</p>
-                <p class="description">
-                    産地直送の贅沢ミルクを使用しています。<br>
-                    オリジナルのラテアートも自慢です。
-                </p>
-            </li>
-            <li class="menuContent">
-                <img src="{% static 'assets/img/black-tea.jpg' %}" alt="black-tea">
-                <h3>紅茶</h3>
-                <p class="price">480円</p>
-                <p class="description">
-                    圧倒的な茶葉使用。<br>
-                    故郷でもない外国の景色に想いを馳せることができます。
-                </p>
-            </li>
+            {% if menu_items %}
+                {% for item in menu_items %}
+                    <li class="menuContent">
+                        <img src="{% static 'assets/img/'|add:item.img_path %}" alt="black-tea">
+                        <h3>{{ item.name }}</h3>
+                        <p class="price">{{ item.price }}円</p>
+                        <p class="description">{{ item.description }}</p>
+                    </li>
+                {% endfor %}
+            {% endif %}
         </ul>
     </div>
     <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
