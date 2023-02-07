@@ -1,4 +1,7 @@
 from django.views import generic
+from pprint import pprint
+
+from .forms import ContactForm
 
 class IndexView(generic.TemplateView):
     template_name = "index.html"
@@ -28,5 +31,14 @@ class MenuView(generic.TemplateView):
                 'img_path': 'black-tea.jpg'
             }, 
         ]
+
+        return context
+
+class ContactView(generic.FormView):
+    template_name = "contact.html"
+    form_class = ContactForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
         return context

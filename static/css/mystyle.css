@@ -148,3 +148,72 @@ footer p {
     margin-top: 30px;
     margin-left: 20px;
 }
+
+/* お問い合わせ */
+
+.sectionContact {
+    background-color: var(--base-color);
+    top: 0;
+    color: var(--dark-color);
+    min-height: calc(100vh - var(--footer-height));
+}
+
+.wrapperForm {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.formContent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.formContent p {
+    position: relative;
+    display: block;
+    margin-right: 10px;
+    padding: 5px 5px;
+}
+
+.formContent input {
+    background-color: inherit;
+    width: 450px;
+    height: 24px;
+    font-size: 16px;
+    border: none;
+    border-bottom: solid var(--dark-color) 1px;
+}
+
+.formContent input:focus {
+    outline: none;
+    border-bottom: solid var(--accent-color) 2px;
+}
+
+.formContent textarea {
+    width: 450px;
+    height: 280px;
+    resize: none;
+    background-color: inherit;
+    font-size: 16px;
+}
+
+.wrapperForm button {
+    background-color: var(--accent-color);
+    display: block;
+    padding: 10px 70px;
+    border: solid var(--semi-dark-color) 1px;
+    font-size: 20px;
+    margin: 3rem auto 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    transition-duration: .2s;
+}
+
+.wrapperForm button:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+    cursor: pointer;
+}
