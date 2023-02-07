@@ -16,6 +16,8 @@ except ValueError as e:
     raise e
 
 secret_key = config['SECRET_KEY']
+email_host = config['EMAIL_HOST']
+email_host_pass = config['EMAIL_HOST_PASS']
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret_key
@@ -169,3 +171,14 @@ LOGGING = {
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'), 
 )
+
+# メールの配信先の設定
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # [開発時用]コンソール上に内容を表示させる
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'       # [運用時用]
+
+# メールサーバー設定
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = email_host
+EMAIL_HOST_PASSWORD = email_host_pass
+EMAIL_USE_TLS = True
