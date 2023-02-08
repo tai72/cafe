@@ -19,6 +19,8 @@ except ValueError as e:
 secret_key = config['SECRET_KEY']
 email_host = config['EMAIL_HOST']
 email_host_pass = config['EMAIL_HOST_PASS']
+db_user = config['DB_USER']
+db_password = config['DB_PASSWORD']
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret_key
@@ -83,8 +85,12 @@ WSGI_APPLICATION = 'cafe.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'cafe_app', 
+        'USER': db_user, 
+        'PASSWORD': db_password, 
+        'HOST': '', 
+        'PORT': '', 
     }
 }
 
