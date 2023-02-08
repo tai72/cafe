@@ -24,9 +24,14 @@ email_host_pass = config['EMAIL_HOST_PASS']
 SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('GAE_APPLICATION', None):
+    # 本番環境
+    DEBUG = False
+else:
+    # 開発環境
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -182,8 +187,8 @@ MESSAGE_TAGS = {
 }
 
 # メールの配信先の設定
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # [開発時用]コンソール上に内容を表示させる
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'       # [運用時用]
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # [開発時用]コンソール上に内容を表示させる
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'       # [運用時用]
 
 # メールサーバー設定
 EMAIL_HOST = 'smtp.gmail.com'
