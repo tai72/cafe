@@ -11,6 +11,20 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
     </head>
     <body>
+        <!-- messages -->
+
+        {% if messages %}
+        <div class="wrapperMessages">
+            <div class="messagesInner">
+                <ul>
+                    {% for message in messages %}
+                    <li class="message {{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
         {% block contents %}{% endblock contents %}
 
         <!-- フッター -->

@@ -1,6 +1,7 @@
 import os
 import json
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -138,7 +139,7 @@ LOGGING = {
             'level': 'INFO', 
         }, 
         # cafe_appアプリケーションが利用するロガー
-        'cafe_app_result': {
+        'cafe_app': {
             'handlers': ['console'], 
             'level': 'DEBUG', 
         }, 
@@ -171,6 +172,14 @@ LOGGING = {
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'), 
 )
+
+# メッセージレベルに応じたタグ
+MESSAGE_TAGS = {
+    messages.ERROR: 'message-danger', 
+    messages.WARNING: 'message-warning', 
+    messages.SUCCESS: 'message-success', 
+    messages.INFO: 'message-info', 
+}
 
 # メールの配信先の設定
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # [開発時用]コンソール上に内容を表示させる

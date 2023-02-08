@@ -26,6 +26,22 @@ a:link, a:visited, a:hover, a:active {
     padding: 3rem;
 }
 
+/* messages */
+
+.wrapperMessages {
+    background-color: var(--base-color);
+    padding: 20px 0;
+}
+
+.message {
+    background-color: var(--semi-dark-color);
+    width: fit-content;
+    padding: 10px 20px;
+    margin: .2rem auto;
+    color: var(--base-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
 /* トップページ */
 
 .topPage {
