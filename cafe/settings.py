@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', 
 
     'cafe_app.apps.CafeAppConfig', 
+    'accounts.apps.AccountsConfig', 
 ]
 
 MIDDLEWARE = [
@@ -202,3 +203,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = email_host
 EMAIL_HOST_PASSWORD = email_host_pass
 EMAIL_USE_TLS = True
+
+# 認証時にカスタムユーザーモデルを参照する
+AUTH_USER_MODEL = 'accounts.CustomUser'
