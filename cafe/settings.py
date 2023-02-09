@@ -48,6 +48,10 @@ INSTALLED_APPS = [
 
     'cafe_app.apps.CafeAppConfig', 
     'accounts.apps.AccountsConfig', 
+    
+    'django.contrib.sites', 
+    'allauth', 
+    'allauth.account', 
 ]
 
 MIDDLEWARE = [
@@ -206,3 +210,33 @@ EMAIL_USE_TLS = True
 
 # 認証時にカスタムユーザーモデルを参照する
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# django.contrib.sites用のサイト識別IDを設定
+SITE_ID = 1
+
+# 認証バックエンドの設定
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',   # 一般ユーザー用（メールアドレス認証）
+    'django.contrib.auth.backends.ModelBackend',    # 管理サイト用（ユーザー名認証）
+)
+
+# 認証方式を「メールアドレス」に設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False    # ユーザー名は使用しない
+
+# サインアップにメールアドレス確認を挟むように設定
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+# ログイン / ログアウト後のリダイレクト先を設定
+LOGIN_REDIRECT_URL = 'cafe_app:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+# 「ログアウト」を一回クリックしただけでログアウトできるように設定
+ACCOUNT_LOGOUT_ON_GET = True
+
+# django-allauthが送信するメールの件名に自動付与される接頭辞を空にする設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+# デフォルトのメール送信元の設定
+DEFAULT_FROM_EMAIL = email_host

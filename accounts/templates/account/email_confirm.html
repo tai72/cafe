@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}サインアップの確定{% endblock title %}
+
+{% block head %}<link type="text/css" rel="stylesheet" href="{% static 'css/accounts-style.css' %}">{% endblock head %}
+
+{% block contents %}
+<section class="section-accounts" id="section-signup">
+    <div class="wrapperHeader">
+        <h2>ユーザー登録</h2>
+        <p>確認のメールを送信しました。</p>
+    </div>
+    
+    {% if confirmation %}
+    <div class="wrapper-accounts-form text-align-center">
+            <p class="notion">ユーザー登録を確定するには、以下のボタンを押してください。</p>
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form-accounts">
+                {% csrf_token %}
+    
+                <button class="accounts-btn" type="submit">確定</button>
+            </form>
+        </div>
+    {% else %}
+        {% url 'account_email' as email_url %}
+
+        <div class="text-align-center">
+            <p>リンクの有効期限が過ぎています。<a href="{{ email_url }}">再申請</a>.</p>
+        </div>
+    {% endif %}
+
+    <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
+</section>
+{% endblock contents %}

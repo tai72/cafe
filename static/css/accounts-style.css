@@ -1,0 +1,110 @@
+/* 共通 */
+
+:root {
+    --dark-color: #442f1e;
+    --semi-dark-color: #614039;
+    --base-color: #d3c2bb;
+    --accent-color: #598493;
+    --footer-height: 100px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: -apple-system, Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif;
+    box-sizing: border-box;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.notion {
+    display: block;
+    margin: 20px;
+}
+
+.notion a {
+    border-bottom: solid 1px var(--dark-color);
+}
+
+.section-accounts {
+    background-color: var(--base-color);
+    min-height: calc(100vh - var(--footer-height));
+}
+
+.wrapperHeader {
+    text-align: center;
+    padding: 3rem;
+}
+
+.wrapperHeader p {
+    display: block;
+    margin-top: 2rem;
+}
+
+.accounts-link {
+    font-weight: bold;
+}
+
+.form-accounts {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.form-content input {
+    background-color: inherit;
+    width: 450px;
+    height: 24px;
+    font-size: 16px;
+    border: none;
+    border-bottom: solid var(--dark-color) 1px;
+    margin-left: 10px;
+}
+
+.form-content input:focus {
+    outline: none;
+    border-bottom: solid var(--accent-color) 2px;
+}
+
+.form-content label:after {
+    position: relative;
+    content: ' : ';
+}
+
+.accounts-btn {
+    background-color: var(--accent-color);
+    display: block;
+    padding: 10px 70px;
+    border: solid var(--semi-dark-color) 1px;
+    font-size: 20px;
+    margin: 3rem auto 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    transition-duration: .2s;
+}
+
+.accounts-btn:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+    cursor: pointer;
+}
+
+.radio-btn {
+    width: fit-content;
+    margin: 0 auto;
+}

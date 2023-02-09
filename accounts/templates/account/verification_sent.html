@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}メールアドレスの確認{% endblock title %}
+
+{% block head %}<link type="text/css" rel="stylesheet" href="{% static 'css/accounts-style.css' %}">{% endblock head %}
+
+{% block contents %}
+<section class="section-accounts" id="section-signup">
+    <div class="wrapperHeader">
+        <h2>メールアドレスを確認してください</h2>
+        <p>確認のメールを送信しました。</p>
+        <p>
+            メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。<br>
+            数分経っても確認のメールが届かない場合はご連絡ください。
+        </p>
+    </div>
+    <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
+</section>
+{% endblock contents %}
