@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import ContactForm
+from .forms import ContactForm, CreateMenuForm
 from .models import CafeMenu
 
 # ロガーのインスタンス化
@@ -65,7 +65,17 @@ class OriginalMenuList(LoginRequiredMixin, generic.ListView):
         # ログインユーザーに基づいたメニューを抽出している.さらに作成日時の新しい順で.
         menus = CafeMenu.objects.filter(user=self.request.user).order_by('-created_at')
         return menus
-def get_queryset(self):
-    # ログインユーザーに基づいたメニューを抽出している.さらに作成日時の新しい順で.
-    menus = CafeMenu.objects.filter(user=self.request.user).order_by('-created_at')
-    return menus
+
+class CreateMenuView(LoginRequiredMixin, generic.CreateView):
+    model = CafeMenu
+    template_name = 'create_menu.html'
+    form_class = CreateMenuForm
+    success_url = reverse_lazy('cafe_app:original_menu_list')
+
+    # データベースに保存するだけなら不要だが、userやcreated_atなどがカスタムユーザーモデルからなのでオーバーライドする必要がある.
+    def form_valid(self, form):
+        menu = form.save(commit=False)
+        menu.user = self.request.user
+        menu.save()
+        messages.success(self.request, '新規メニューを作成しました')
+        return super().form_valid(form)

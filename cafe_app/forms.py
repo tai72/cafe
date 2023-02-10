@@ -4,6 +4,8 @@ from pathlib import Path
 from django import forms
 from django.core.mail import EmailMessage
 
+from .models import CafeMenu
+
 # Read settings.json
 BASE_DIR = Path(__file__).resolve().parent.parent
 try:
@@ -75,3 +77,8 @@ class ContactForm(forms.Form):
         # メール送信処理
         msg = EmailMessage(subject=subject, body=body, from_email=from_email, to=to_list, cc=cc_list)
         msg.send()
+
+class CreateMenuForm(forms.ModelForm):
+    class Meta:
+        model = CafeMenu
+        fields = ('photo', 'name', 'price', 'description')

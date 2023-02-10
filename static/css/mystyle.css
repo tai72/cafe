@@ -26,6 +26,11 @@ a:link, a:visited, a:hover, a:active {
     padding: 3rem;
 }
 
+.notion {
+    display: block;
+    margin: 20px;
+}
+
 /* messages */
 
 .wrapperMessages {
