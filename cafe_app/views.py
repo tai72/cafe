@@ -2,8 +2,10 @@ import logging
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ContactForm
+from .models import CafeMenu
 
 # ロガーのインスタンス化
 logger = logging.getLogger(__name__)
@@ -54,3 +56,16 @@ class ContactView(generic.FormView):
         messages.success(self.request, 'お問い合わせありがとうございます。')
         logger.info('Contact sent by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
+
+class OriginalMenuList(LoginRequiredMixin, generic.ListView):
+    model = CafeMenu
+    template_name = 'original_menu_list.html'
+
+    def get_queryset(self):
+        # ログインユーザーに基づいたメニューを抽出している.さらに作成日時の新しい順で.
+        menus = CafeMenu.objects.filter(user=self.request.user).order_by('-created_at')
+        return menus
+def get_queryset(self):
+    # ログインユーザーに基づいたメニューを抽出している.さらに作成日時の新しい順で.
+    menus = CafeMenu.objects.filter(user=self.request.user).order_by('-created_at')
+    return menus

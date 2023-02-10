@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}オリジナルメニュー{% endblock title %}
+
+{% block contents %}
+<section class="sectionMenu">
+    <div class="wrapperHeader">
+        <h2>ORIGINAL MENU</h2>
+    </div>
+    <div class="wrapperMenu">
+        <ul class="ulMenu">
+            {% for menu in object_list %}
+                <li class="menuContent">
+                    <img src="{{ menu.photo.url }}" alt="{{ menu.name }}">
+                    <h3>{{ menu.name }}</h3>
+                    <p class="price">{{ menu.price }}円</p>
+                    <p class="description">{{ menu.description }}</p>
+                </li>
+            {% empty %}
+                <p>メニューがありません</p>
+            {% endfor %}
+        </ul>
+    </div>
+    <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
+</section>
+{% endblock contents %}

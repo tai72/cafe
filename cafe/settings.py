@@ -240,3 +240,10 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # デフォルトのメール送信元の設定
 DEFAULT_FROM_EMAIL = email_host
+
+# 開発環境におけるメディアファイルの配置場所（「media/」はGithub管理する必要なし）
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 画像を配信するURLのホスト名以下を指定
+# 例えば「hoge.png」なら、'https://<ホスト名>/media/hoge.png'で配信される
+MEDIA_URL = '/media/'

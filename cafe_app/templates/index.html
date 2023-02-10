@@ -14,6 +14,7 @@
             <ul>
                 <li><a href="#">HOME</a></li>
                 <li><a href="{% url 'cafe_app:menu' %}">MENU</a></li>
+                <li><a href="{% url 'cafe_app:original_menu_list' %}">ORIGINAL</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'account_logout' %}">LOG OUT</a></li>
                 {% else %}
