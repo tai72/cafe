@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}メニュー詳細{% endblock title %}
+
+{% block contents %}
+<section class="sectionMenu">
+    <div class="wrapperHeader">
+        <h2>MENU DETAIL</h2>
+    </div>
+    <div class="wrapperMenu">
+        <ul class="ulMenu">
+            <li class="menuContent">
+                {% if object.photo %}
+                    <img src="{{ object.photo.url }}" alt="{{ object.name }}">
+                {% endif %}
+                <h3>{{ object.name }}</h3>
+                <p class="price">{{ object.price }}円</p>
+                <p class="description">{{ object.description }}</p>
+                <hr>
+                <p class="created_at">作成日時：{{ object.created_at }}</p>
+                <p class="updated_at">更新日時：{{ object.updated_at }}</p>
+            </li>
+        </ul>
+    </div>
+    <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
+</section>
+{% endblock contents %}

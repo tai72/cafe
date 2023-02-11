@@ -79,3 +79,9 @@ class CreateMenuView(LoginRequiredMixin, generic.CreateView):
         menu.save()
         messages.success(self.request, '新規メニューを作成しました')
         return super().form_valid(form)
+
+class MenuDetailView(LoginRequiredMixin, generic.DetailView):
+    model = CafeMenu
+    # slug_field = 'name'    # モデルのフィールド名
+    # slug_url_kwarg = 'name'    # urls.pyでのキーワード名
+    template_name = 'menu_detail.html'

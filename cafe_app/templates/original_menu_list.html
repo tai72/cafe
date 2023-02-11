@@ -13,12 +13,14 @@
     <div class="wrapperMenu">
         <ul class="ulMenu">
             {% for menu in object_list %}
-                <li class="menuContent">
-                    <img src="{{ menu.photo.url }}" alt="{{ menu.name }}">
-                    <h3>{{ menu.name }}</h3>
-                    <p class="price">{{ menu.price }}円</p>
-                    <p class="description">{{ menu.description }}</p>
-                </li>
+                <a href="{% url 'cafe_app:menu_detail' menu.pk %}">
+                    <li class="menuContent">
+                        <img src="{{ menu.photo.url }}" alt="{{ menu.name }}">
+                        <h3>{{ menu.name }}</h3>
+                        <p class="price">{{ menu.price }}円</p>
+                        <p class="description">{{ menu.description }}</p>
+                    </li>
+                </a>
             {% empty %}
                 <p>メニューがありません</p>
             {% endfor %}

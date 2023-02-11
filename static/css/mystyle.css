@@ -163,6 +163,15 @@ footer p {
     word-wrap: break-word;
 }
 
+.menuContent .created_at, .menuContent .updated_at {
+    display: block;
+    margin-top: 5px;
+}
+
+.menuContent hr {
+    margin: 30px 0;
+}
+
 .backToHome {
     display: block;
     width: fit-content;
