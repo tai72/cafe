@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}お問い合わせ{% endblock title %}
+
+{% block contents %}
+<section class="sectionContact">
+    <div class="wrapperHeader">
+        <h2>UPDATE</h2>
+    </div>
+    <div class="wrapperUpdateForm">
+        <form class="formUpdate" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {{ form.as_p }}
+            <div class="wrapperUpdateBtns">
+                <button class="btn btnUpdate" type="submit">更 新</button>
+                <a class="btn btnCancel" href="{% url 'cafe_app:menu_detail' object.pk %}"><p>キャンセル</p></a>
+            </div>
+        </form>
+    </div>
+    <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
+</section>
+{% endblock contents %}

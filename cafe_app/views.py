@@ -85,3 +85,21 @@ class MenuDetailView(LoginRequiredMixin, generic.DetailView):
     # slug_field = 'name'    # モデルのフィールド名
     # slug_url_kwarg = 'name'    # urls.pyでのキーワード名
     template_name = 'menu_detail.html'
+
+class MenuUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = CafeMenu
+    template_name = 'menu_update.html'
+    form_class = CreateMenuForm
+
+    # URLが動的に変化するページに遷移する場合に用いる
+    def get_success_url(self):
+        return reverse_lazy('cafe_app:menu_detail', kwargs={'pk': self.kwargs['pk']})
+    
+    def form_valid(self, form):
+        messages.success(self.request, 'メニューを更新しました')
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'メニューの更新に失敗しました')
+        return super().form_invalid(form)
+        

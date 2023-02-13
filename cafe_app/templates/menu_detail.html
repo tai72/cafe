@@ -23,6 +23,9 @@
                 <p class="updated_at">更新日時：{{ object.updated_at }}</p>
             </li>
         </ul>
+        <div class="wrapperEditBtns">
+            <a class="btn-update" href="{% url 'cafe_app:menu_update' object.pk %}">編 集</a>
+        </div>
     </div>
     <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
 </section>

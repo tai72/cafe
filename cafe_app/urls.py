@@ -9,4 +9,5 @@ urlpatterns = [
     path('original-menu-list', views.OriginalMenuList.as_view(), name="original_menu_list"), 
     path('create-menu', views.CreateMenuView.as_view(), name="create_menu"), 
     path('menu-detail/<int:pk>/', views.MenuDetailView.as_view(), name="menu_detail"), 
+    path('menu-update/<int:pk>/', views.MenuUpdateView.as_view(), name="menu_update"), 
 ]
