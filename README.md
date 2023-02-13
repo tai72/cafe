@@ -8,6 +8,8 @@
 
 本プロジェクトは「初めてDjangoを用いてWebアプリケーションを作成したい」、そんな方向けに書いた紹介ブログのデモサイトです。
 
+[デモサイト](https://cafe-project-377203.an.r.appspot.com)
+
 記事は[こちら](https://bestrong-it-men.com/django-app-tutorial-introduction-1/)です。
 
 ## 使用技術
@@ -65,3 +67,5 @@ python manage.py runserver
 ```
 
 その後 http://127.0.0.1:8000 にアクセスします。
+
+<img width="1440" alt="スクリーンショット 2023-02-13 20 06 22" src="https://user-images.githubusercontent.com/99964360/218442091-1ca0ec45-a929-4db5-a224-3c2c16e11e0c.png">
