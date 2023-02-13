@@ -25,6 +25,7 @@
         </ul>
         <div class="wrapperEditBtns">
             <a class="btn-update" href="{% url 'cafe_app:menu_update' object.pk %}">編 集</a>
+            <a class="btn-delete" href="{% url 'cafe_app:menu_delete' object.pk %}">削 除</a>
         </div>
     </div>
     <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>

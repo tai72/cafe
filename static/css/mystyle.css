@@ -178,7 +178,7 @@ footer p {
     justify-content: center;
 }
 
-.wrapperEditBtns a {
+.wrapperEditBtns a, .wrapperEditBtns button {
     padding: 10px 30px;
     font-size: 16px;
     margin: 0 5px;
@@ -186,14 +186,19 @@ footer p {
     transition-duration: .2s;
 }
 
-.wrapperEditBtns a:hover {
+.wrapperEditBtns a:hover, .wrapperEditBtns button:hover {
     cursor: pointer;
     opacity: .9;
     transform: translateY(-2px);
 }
 
-.btn-update {
+.btn-update, .btn-cancel {
     background-color: var(--accent-color);
+    border: none;
+}
+
+.btn-delete {
+    background-color: #e83745;
     border: none;
 }
 

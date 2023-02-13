@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}メニュー削除{% endblock title %}
+
+{% block contents %}
+<section class="sectionMenu">
+    <div class="wrapperHeader">
+        <h2>MENU DELETE</h2>
+        <p class="notion">メニューを削除します。よろしいですか？</p>
+    </div>
+    <div class="wrapperMenu">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="wrapperEditBtns">
+                <a class="btn-cancel" href="{% url 'cafe_app:menu_detail' object.pk %}">キャンセル</a>
+                <button class="btn-delete" type="submit">削 除</button>
+            </div>
+        </form>
+    </div>
+    <a class="backToHome" href="{% url 'cafe_app:index' %}">＜＜＜ホームに戻る</a>
+</section>
+{% endblock contents %}

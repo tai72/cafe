@@ -103,3 +103,11 @@ class MenuUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.error(self.request, 'メニューの更新に失敗しました')
         return super().form_invalid(form)
         
+class MenuDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = CafeMenu
+    template_name = 'menu_delete.html'
+    success_url = reverse_lazy('cafe_app:original_menu_list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'メニューを削除しました')
+        return super().delete(request, *args, **kwargs)
