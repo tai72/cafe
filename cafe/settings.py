@@ -1,26 +1,24 @@
 import os
 import json
+import environ
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Read settings.json
-try:
-    config_path = os.path.join(BASE_DIR, 'settings.json')
-    config = json.load(open(config_path, "r", encoding="utf-8"))
-except FileNotFoundError as e:
-    print("[ERROR] Config file is not found.")
-    raise e
-except ValueError as e:
-    print("[ERROR] Json file is invalid.")
-    raise e
+# Read .env file
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
-secret_key = config['SECRET_KEY']
-email_host = config['EMAIL_HOST']
-email_host_pass = config['EMAIL_HOST_PASS']
-db_user = config['DB_USER']
-db_password = config['DB_PASSWORD']
+secret_key = env('SECRET_KEY')
+email_host = env('EMAIL_HOST')
+email_host_pass = env('EMAIL_HOST_PASS')
+db_user_dev = env('DB_USER_DEV')
+db_password_dev = env('DB_PASSWORD_DEV')
+instance_connection_name = env('INSTANCE_CONNECTION_NAME')
+db_user = env('DB_USER')
+db_password = env.str('DB_PASSWORD')
+db_name = env.str('DB_NAME')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret_key
@@ -84,21 +82,43 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cafe.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# if os.environ.get('GAE_APPLICATION', None):
+#     # 本番環境（GCP）
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': db_name,
+#             'USER': db_user,
+#             'PASSWORD': db_password,
+#             'HOST': f'/cloudsql/{instance_connection_name}',
+#         }
+#     }
+# else:
+#     # 開発環境
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'cafe_app',
+#             'USER': db_user_dev,
+#             'PASSWORD': db_password_dev,
+#             'HOST': '',
+#             'PORT': '',
+#         }
+#     }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'cafe_app', 
-        'USER': db_user, 
-        'PASSWORD': db_password, 
-        'HOST': '', 
-        'PORT': '', 
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': db_name,
+        'USER': db_user,
+        'PASSWORD': db_password,
+        'HOST': '127.0.0.1',
+        'PORT': '3306', 
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
