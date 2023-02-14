@@ -85,40 +85,40 @@ WSGI_APPLICATION = 'cafe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# if os.environ.get('GAE_APPLICATION', None):
-#     # 本番環境（GCP）
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': db_name,
-#             'USER': db_user,
-#             'PASSWORD': db_password,
-#             'HOST': f'/cloudsql/{instance_connection_name}',
-#         }
-#     }
-# else:
-#     # 開発環境
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'cafe_app',
-#             'USER': db_user_dev,
-#             'PASSWORD': db_password_dev,
-#             'HOST': '',
-#             'PORT': '',
-#         }
-#     }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': db_name,
-        'USER': db_user,
-        'PASSWORD': db_password,
-        'HOST': '127.0.0.1',
-        'PORT': '3306', 
+if os.environ.get('GAE_APPLICATION', None):
+    # 本番環境（GCP）
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': db_name,
+            'USER': db_user,
+            'PASSWORD': db_password,
+            'HOST': f'/cloudsql/{instance_connection_name}',
+        }
     }
-}
+else:
+    # 開発環境
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'cafe_app',
+            'USER': db_user_dev,
+            'PASSWORD': db_password_dev,
+            'HOST': '',
+            'PORT': '',
+        }
+    }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': db_name,
+#         'USER': db_user,
+#         'PASSWORD': db_password,
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306', 
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
