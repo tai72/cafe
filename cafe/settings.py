@@ -19,6 +19,7 @@ instance_connection_name = env('INSTANCE_CONNECTION_NAME')
 db_user = env('DB_USER')
 db_password = env.str('DB_PASSWORD')
 db_name = env.str('DB_NAME')
+bucket_name = env.str('BUCKET_NAME')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret_key
@@ -151,12 +152,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -262,9 +257,54 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 # デフォルトのメール送信元の設定
 DEFAULT_FROM_EMAIL = email_host
 
-# 開発環境におけるメディアファイルの配置場所（「media/」はGithub管理する必要なし）
+# Settings of static and media files.
+
+# if os.environ.get('GAE_APPLICATION', None):
+#     # 開発環境
+#     from google.oauth2 import service_account
+
+#     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#         os.path.join(BASE_DIR, env('JSON_KEY_NAME'))
+#     )
+
+#     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+#     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+#     GS_BUCKET_NAME = bucket_name
+
+#     STATIC_URL = f'https://storage.googleapis.com/{bucket_name}/'
+
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+#     MEDIA_URL = f'https://storage.googleapis.com/{bucket_name}/media/'
+# else:
+#     STATIC_URL = 'static/'
+
+#     # 開発環境におけるメディアファイルの配置場所（「media/」はGithub管理する必要なし）
+#     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#     # 画像を配信するURLのホスト名以下を指定
+#     # 例えば「hoge.png」なら、'https://<ホスト名>/media/hoge.png'で配信される
+#     MEDIA_URL = '/media/'
+
+# 開発環境
+from google.oauth2 import service_account
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, env('JSON_KEY_NAME'))
+)
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+GS_BUCKET_NAME = bucket_name
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# 画像を配信するURLのホスト名以下を指定
-# 例えば「hoge.png」なら、'https://<ホスト名>/media/hoge.png'で配信される
-MEDIA_URL = '/media/'
+MEDIA_URL = f'https://storage.googleapis.com/{bucket_name}/media/'
