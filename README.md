@@ -30,22 +30,28 @@ pip install psycopg2-binary
 pip install django-allauth
 pip install Pillow
 pip install gunicorn
+pip install django-storages
+pip install google-cloud-storage
 ```
 
 
-### settings.jsonの作成
+### .envの作成
 
-プロジェクトのルートディレクトリに**settings.json**を作成します。Djangoプロジェクトで使用する機密情報を分離しています。
+プロジェクトのルートディレクトリに**.env**を作成します。Djangoプロジェクトで使用する機密情報を分離しています。
 
-```json
-{
-    "SECRET_KEY":"<Djangoプロジェクトのシークレットキー>",
-    "EMAIL_HOST":"<Googleアカウントのメールアドレス>",
-    "EMAIL_OUTLOOK":"<Outlookのメールアドレス（あれば）>",
-    "EMAIL_HOST_PASS":"<Googleのアプリパスワード>",
-    "DB_USER": "<postgreSQLのユーザー名>",
-    "DB_PASSWORD": "<postgreSQLのパスワード>"
-}
+```
+SECRET_KEY="<Djangoプロジェクトのシークレットキー>"
+EMAIL_HOST="<Googleアカウントのメールアドレス>"
+EMAIL_OUTLOOK="<Outlookのメールアドレス（あれば）>
+EMAIL_HOST_PASS="<Googleのアプリパスワード>"
+DB_USER_DEV="<postgreSQLのユーザー名（ローカル）>"
+DB_PASSWORD_DEV="<postgreSQLのパスワード（ローカル）>"
+INSTANCE_CONNECTION_NAME=""
+DB_USER=""
+DB_PASSWORD=""
+DB_NAME=""
+JSON_KEY_NAME=""
+BUCKET_NAME=""
 ```
 
 
