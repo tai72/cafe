@@ -97,30 +97,30 @@ if os.environ.get('GAE_APPLICATION', None):
             'HOST': f'/cloudsql/{instance_connection_name}',
         }
     }
+# else:
+#     # 開発環境（PostgreSQL）
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'cafe_app',
+#             'USER': db_user_dev,
+#             'PASSWORD': db_password_dev,
+#             'HOST': '',
+#             'PORT': '',
+#         }
+#     }
 else:
-    # 開発環境（PostgreSQL）
+    # 開発環境（Cloud SQL）（プロキシ起動する必要あり）
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'cafe_app',
-            'USER': db_user_dev,
-            'PASSWORD': db_password_dev,
-            'HOST': '',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': db_name,
+            'USER': db_user,
+            'PASSWORD': db_password,
+            'HOST': '127.0.0.1',
+            'PORT': '3306', 
         }
     }
-# else:
-    # 開発環境（Cloud SQL）
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.mysql',
-    #         'NAME': db_name,
-    #         'USER': db_user,
-    #         'PASSWORD': db_password,
-    #         'HOST': '127.0.0.1',
-    #         'PORT': '3306', 
-    #     }
-    # }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -259,53 +259,53 @@ DEFAULT_FROM_EMAIL = email_host
 
 # Settings of static and media files.
 
-if os.environ.get('GAE_APPLICATION', None):
-    # 開発環境
-    from google.oauth2 import service_account
+# if os.environ.get('GAE_APPLICATION', None):
+#     # 開発環境
+#     from google.oauth2 import service_account
 
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        os.path.join(BASE_DIR, env('JSON_KEY_NAME'))
-    )
+#     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#         os.path.join(BASE_DIR, env('JSON_KEY_NAME'))
+#     )
 
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+#     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+#     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-    GS_BUCKET_NAME = bucket_name
+#     GS_BUCKET_NAME = bucket_name
 
-    STATIC_URL = f'https://storage.googleapis.com/{bucket_name}/'
+#     STATIC_URL = f'https://storage.googleapis.com/{bucket_name}/'
 
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-    MEDIA_URL = f'https://storage.googleapis.com/{bucket_name}/media/'
-else:
-    # 開発環境
-    STATIC_URL = 'static/'
+#     MEDIA_URL = f'https://storage.googleapis.com/{bucket_name}/media/'
+# else:
+#     # 開発環境
+#     STATIC_URL = 'static/'
 
-    # 開発環境におけるメディアファイルの配置場所（「media/」はGithub管理する必要なし）
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#     # 開発環境におけるメディアファイルの配置場所（「media/」はGithub管理する必要なし）
+#     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-    # 画像を配信するURLのホスト名以下を指定
-    # 例えば「hoge.png」なら、'https://<ホスト名>/media/hoge.png'で配信される
-    MEDIA_URL = '/media/'
+#     # 画像を配信するURLのホスト名以下を指定
+#     # 例えば「hoge.png」なら、'https://<ホスト名>/media/hoge.png'で配信される
+#     MEDIA_URL = '/media/'
 
 # 開発環境でもGCSと連携したい場合
-# from google.oauth2 import service_account
+from google.oauth2 import service_account
 
-# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-#     os.path.join(BASE_DIR, env('JSON_KEY_NAME'))
-# )
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, env('JSON_KEY_NAME'))
+)
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-# STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-# GS_BUCKET_NAME = bucket_name
+GS_BUCKET_NAME = bucket_name
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# MEDIA_URL = f'https://storage.googleapis.com/{bucket_name}/media/'
+MEDIA_URL = f'https://storage.googleapis.com/{bucket_name}/media/'
