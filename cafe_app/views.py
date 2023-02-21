@@ -1,10 +1,13 @@
+import json
 import logging
+import requests
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 
-from .forms import ContactForm, CreateMenuForm
+from .forms import ContactForm, CreateMenuForm, BookTitleForm
 from .models import CafeMenu
 
 # ロガーのインスタンス化
@@ -111,3 +114,48 @@ class MenuDeleteView(LoginRequiredMixin, generic.DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'メニューを削除しました')
         return super().delete(request, *args, **kwargs)
+
+class BookTitleView(generic.FormView):
+    template_name = 'book_title.html'
+    form_class = BookTitleForm
+    success_url = reverse_lazy('cafe_app:ajax')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form(self.form_class)
+        if form.is_valid():
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                """ Ajax処理を別メソッドに切り離す """
+
+                return self.ajax_response(form)
+            
+            # Ajax以外のPOSTメソッドの処理
+            return super().form_valid(form)
+        else:
+            # フォームバリデーション通過できなかった場合
+            return super().form_invalid(form)
+    
+    def get_title(self, keyword):
+        """ APIを叩いて書籍情報を取得する """
+
+        # エンドポイントURL
+        url = "https://www.googleapis.com/books/v1/volumes?q={}"
+
+        # データ取得
+        res = requests.get(url.format(keyword))
+        res_json = json.loads(res.content)
+
+        # 取得したデータからタイトルのみをリスト化
+        title_list = [item['volumeInfo']['title'] for item in res_json['items']]
+        
+        return title_list
+    
+    def ajax_response(self, form):
+        # フォーム入力した「キーワード」を取得する
+        keyword = form.cleaned_data['keyword']
+        
+        # 「キーワード」をもとに、書籍情報を取得する
+        title_list = self.get_title(keyword)
+
+        return HttpResponse(json.dumps({
+            "title": title_list
+        }))

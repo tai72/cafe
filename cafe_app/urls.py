@@ -11,4 +11,5 @@ urlpatterns = [
     path('menu-detail/<int:pk>/', views.MenuDetailView.as_view(), name="menu_detail"), 
     path('menu-update/<int:pk>/', views.MenuUpdateView.as_view(), name="menu_update"), 
     path('menu-delete/<int:pk>/', views.MenuDeleteView.as_view(), name="menu_delete"), 
+    path('book-title/', views.BookTitleView.as_view(), name="book_title"), 
 ]
