@@ -82,3 +82,6 @@ class CreateMenuForm(forms.ModelForm):
     class Meta:
         model = CafeMenu
         fields = ('photo', 'name', 'price', 'description')
+
+class BookTitleForm(forms.Form):
+    keyword = forms.CharField(label='キーワードを入力してください')
